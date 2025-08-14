@@ -1,7 +1,9 @@
 module.exports = {
   default: {
+   
+    paths: ['features/*.feature'],
     require: [
-      "src/steps/**/*.ts",   // steps location
+      "src/steps/**/*.ts",
       "src/support/**/*.ts"
     ],
     requireModule: ["ts-node/register"],
@@ -9,7 +11,9 @@ module.exports = {
       "progress",
       "allure-cucumberjs/reporter"
     ],
-    // Add timeout configuration
+    formatOptions: {
+      resultsDir: 'allure-results',
+    },
     timeout: 60000,
     parallel: 1
   }

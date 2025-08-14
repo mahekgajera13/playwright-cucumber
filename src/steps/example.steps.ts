@@ -1,13 +1,9 @@
-import { Given, Then } from "@cucumber/cucumber";
-import { chromium, Browser, Page } from "playwright";
+// src/steps/example.steps.ts
 
-let browser: Browser;
-let page: Page;
+import { Given, Then } from "@cucumber/cucumber";
+import { page } from "../support/hooks"; // hooks.ts માંથી 'page' ઓબ્જેક્ટને import કરો
 
 Given("I open the Google homepage", async function () {
-  browser = await chromium.launch({ headless: false });
-  const context = await browser.newContext();
-  page = await context.newPage();
   await page.goto("https://www.google.com");
 });
 
@@ -15,5 +11,4 @@ Then("I search for {string}", async function (searchTerm: string) {
   const searchBox = page.locator("textarea[name='q']");
   await searchBox.fill(searchTerm);
   await searchBox.press("Enter");
-  await browser.close();
 });
